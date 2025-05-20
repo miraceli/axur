@@ -7,9 +7,9 @@ Este projeto realiza:
 3. Envia a imagem para inferência no modelo `microsoft-florence-2-large`.
 4. Submissão da resposta da inferência para uma API.
 
-## Pré-requisitos
+## Requisitos
 
-* Python 3.9
+* Docker
 
 ## Como usar
 
@@ -20,20 +20,7 @@ git clone https://github.com/miraceli/axur.git
 cd axur
 ```
 
-### 2. Crie e ative um ambiente virtual
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-### 3. Instale as dependências
-
-```bash
-pip install -r requirements.req
-```
-
-### 4. Configure as variáveis de ambiente
+### 2. Crie o arquivo `.env`
 
 Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
 
@@ -44,17 +31,27 @@ API_URL=https://intern.aiaxuropenings.com/v1/chat/completions
 SUBMIT_URL=https://intern.aiaxuropenings.com/api/submit-response
 ```
 
-### 5. Execute o script
+### 3. Execute o projeto com Docker
 
 ```bash
-python3 scrap.py
+docker compose up --build
 ```
 
 A imagem será salva na pasta `images/`, o resultado da inferência será exibido no terminal e enviado automaticamente para a API de submissão.
 
-## Estrutura
+## Estrutura de Arquivos
 
-* `scrap.py` – Script principal.
-* `read_env_var.py` – Carrega as variáveis de ambiente.
-* `requirements.req` – Lista de dependências.
-* `.env` – Variáveis de ambiente (não incluso no repositório).
+```
+axur/
+├── Dockerfile                # Define a imagem Docker
+├── docker-compose.yml        # Orquestra o container com variáveis de ambiente
+├── scrap.py                  # Script principal
+├── read_env_var.py           # Carrega as variáveis de ambiente
+├── requirements.req          # Lista de dependências Python
+├── .env                      # Variáveis de ambiente (não incluído no repositório)
+└── images/                   # Pasta onde as imagens são salvas
+```
+
+## Observação
+
+O uso de Docker elimina a necessidade de instalar dependências Python localmente ou configurar ambientes virtuais.

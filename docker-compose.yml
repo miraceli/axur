@@ -1,0 +1,8 @@
+version: "3.9"
+
+services:
+  axur:
+    build: .
+    env_file: .env
+    container_name: axur
+    restart: unless-stopped
